@@ -1,0 +1,12 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: google-trans
+
+google:
+  cloud:
+    project-id: gmp-skmr-cube
+    location: global
+    credentials-location: classpath:gmp-skmr-cube-c97e47a18130.json
