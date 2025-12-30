@@ -1,0 +1,30 @@
+# Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+# IDEs & tools
+/.idea/
+*.iml
+*.ipr
+*.iws
+/.settings/
+/.classpath
+/.project
+/.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs & temp
+*.log
+/tmp/
+/logs/
+
+# Test outputs
+/test-output/
+/surefire-reports/
+
+# Credentials
+*.json
