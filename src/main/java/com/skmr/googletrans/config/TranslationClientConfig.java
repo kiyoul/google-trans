@@ -16,13 +16,16 @@ import java.io.InputStream;
 public class TranslationClientConfig {
     @Bean(destroyMethod = "close")
     public TranslationServiceClient translationServiceClient(
-            @Value("${google.cloud.credentials-location}") Resource credentialsResource) throws IOException {
-        try (InputStream inputStream = credentialsResource.getInputStream()) {
-            ServiceAccountCredentials credentials = ServiceAccountCredentials.fromStream(inputStream);
-            TranslationServiceSettings settings = TranslationServiceSettings.newBuilder()
-                    .setCredentialsProvider(FixedCredentialsProvider.create(credentials))
-                    .build();
-            return TranslationServiceClient.create(settings);
+            @Value("${google.cloud.credentials-location:#{null}}") Resource credentialsResource) throws IOException {
+        TranslationServiceSettings.Builder builder = TranslationServiceSettings.newBuilder();
+
+        if (credentialsResource != null) {
+            try (InputStream inputStream = credentialsResource.getInputStream()) {
+                ServiceAccountCredentials credentials = ServiceAccountCredentials.fromStream(inputStream);
+                builder.setCredentialsProvider(FixedCredentialsProvider.create(credentials));
+            }
         }
+
+        return TranslationServiceClient.create(builder.build());
     }
 }
